@@ -10,11 +10,9 @@
 import UIKit
 import os.log
 
-// image: UIImage? UIImage is from UIKit
 class Meal: NSObject, NSSecureCoding {
     
     // MARK: Properties
-    // 1
     var name: String
     var photo: UIImage?
     var rating: Int
@@ -29,11 +27,9 @@ class Meal: NSObject, NSSecureCoding {
         static let name = "name"
         static let photo = "photo"
         static let rating = "rating"
-        
     }
     
     // MARK: Initialization
-    // 2
     init?(name: String, photo: UIImage?, rating: Int) {
         
         // 空文字、負の数の場合　失敗

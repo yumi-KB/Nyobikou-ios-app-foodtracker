@@ -20,18 +20,21 @@
                                 <rect key="frame" x="12" y="148" width="390" height="600"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nn1-eF-DKZ">
-                                        <rect key="frame" x="152" y="0.0" width="86" height="20.5"/>
+                                        <rect key="frame" x="152" y="0.0" width="86" height="90"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the meal name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tv3-MB-fXp">
-                                        <rect key="frame" x="0.0" y="32.5" width="390" height="34"/>
+                                        <rect key="frame" x="0.0" y="102" width="390" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="C5Y-9v-tF9"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="58p-fr-4S0">
-                                        <rect key="frame" x="0.0" y="78.5" width="390" height="390"/>
+                                        <rect key="frame" x="0.0" y="148" width="390" height="390"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="58p-fr-4S0" secondAttribute="height" multiplier="1:1" id="Gk1-qa-yjE"/>
@@ -41,7 +44,11 @@
                                         </connections>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dci-9R-e2D" userLabel="RatingControl" customClass="RatingControl" customModule="FoodTracker" customModuleProvider="target">
-                                        <rect key="frame" x="81.5" y="480.5" width="227" height="119.5"/>
+                                        <rect key="frame" x="54" y="550" width="282" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="282" id="PyG-1L-hMU"/>
+                                            <constraint firstAttribute="height" constant="50" id="dH7-ry-yvj"/>
+                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="size" keyPath="starSize">
                                                 <size key="value" width="39" height="40"/>
