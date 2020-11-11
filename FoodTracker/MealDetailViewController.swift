@@ -27,11 +27,9 @@ class MealDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self == ViewController class
-        //Handle the text field's user input through delegate callbacks.
+        // Handle the text field's user input through delegate callbacks.
         nameTextField.delegate = self
         
-        //
         // Set up views if editing an existing Meal.
         if let meal = meal {
             navigationItem.title = meal.name
@@ -39,12 +37,9 @@ class MealDetailViewController: UIViewController {
             photoImageView.image = meal.photo
             ratingControl.rating = meal.rating
         }
-        
-        //
-        // viewController からのみアクセスできるprivate
-        // 初期状態　空textの時にSaveButtonを押せないようにする
         updateSaveButtonState()
     }
+    
     
     // MARK: Navigation
     @IBAction func cancel(_ sender: UIBarButtonItem) {
@@ -83,60 +78,58 @@ class MealDetailViewController: UIViewController {
         // destinationから　sender.source.mealでアクセスする
     }
     
-    //MARK: Actions
+    
+    // MARK: Actions
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
-        //Hide the keyboard.
-        //直前にキーボードを開いてテキストフィールドを編集中だった場合、隠す
+        // Hide the keyboard.
+        // 直前にキーボードを開いてテキストフィールドを編集中だった場合、隠す
         nameTextField.resignFirstResponder()
         
-        //UIImagePickerController is a view controller that lets a user pick media from their photo library
+        // UIImagePickerController is a view controller that lets a user pick media from their photo library
         let imagePickerController = UIImagePickerController()
         
-        //Only allow photos to be picked, not taken.
-        //シミュレータではカメラが使えないのでカメラロールからのみ
-        //UIimagePickerControllersourceType.photoLibrary
+        // Only allow photos to be picked, not taken.
+        // .photoLibraryは、UIimagePickerControllersourceType.photoLibrary
         imagePickerController.sourceType = .photoLibrary
         
-        //このActionが起きたら、delegateに格納、つまり通知を受け取るように設定する
+        // Make sure ViewController is notified when the user picks an image.
+        // self(MealDetailViewController)を、画像選択完了時の通知先として設定する
         imagePickerController.delegate = self
+        
         present(imagePickerController, animated: true, completion: nil)
     }
-    /*
-    @IBAction func setDefaultLabelText(_ sender: UIButton) {
-        mealNameLabel.text = "Default Text"
-    }
- */
 }
 
-//MARK: UITextFieldDelegate
+//　MARK: UITextFieldDelegate
 extension MealDetailViewController: UISearchTextFieldDelegate {
-    //First Responderを解除するタイミングを決める
-    //リターンキー(Done)を完了させると、キーボードを収納する
+    // First Responderを解除するタイミングを決める
+    // リターンキー(Done)を押した際に起動する関数
+    // キーボードを収納し、リターンキーを完了させる
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard.
         textField.resignFirstResponder()
+        
         // Bool型なので
         return true
     }
     
-    //First Responder が解除された後
-    //入力値をLabelに反映
-    // キーボードが閉じた後に
+    // First Responder が解除された後(キーボードが閉じた後・編集終了時)に動作する関数
+    // 入力値をLabelに反映
     func textFieldDidEndEditing(_ textField: UITextField) {
         mealNameLabel.text = textField.text
-        //
+        
         updateSaveButtonState()
         navigationItem.title = textField.text
     }
     
-    // SaveButtonを押せないように　編集し始め
-    // キーボードが出現した時に
+    // キーボードが出現した時（編集開始時）に動作する関数
+    // 編集中はsaveButtonを押せないようにする
     func textFieldDidBeginEditing(_ textField: UITextField) {
         // Disable the Save button while editing.
         saveButton.isEnabled = false
     }
     
-    // SaveButtonを押せないように　空のtext
+    
     // MARK: Private Methods
     private func updateSaveButtonState() {
         // Disable the Save button if the text field is empty.
@@ -146,29 +139,25 @@ extension MealDetailViewController: UISearchTextFieldDelegate {
     
 }
 
-//MARK: UIImagePickerControllerDelegate+UINavigationControllerDelegate
+// MARK: UIImagePickerControllerDelegate+UINavigationControllerDelegate
 extension MealDetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        //Dismiss  the picker if the user canceled
+        // Dismiss the picker if the user canceled
         dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        //エラー処理
-        //The info dictionary may contain multiple representations of the image. You want to use the original.
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        // The info dictionary may contain multiple representations of the image. You want to use the original.
         guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provide the following: \(info)")
         }
-        
-        //画像をUIImageとして取り出した
-        
-        //photoImageViewに反映
+
+        // photoImageViewに反映
         photoImageView.image = selectedImage
         
-        //Dismiss the picker.
+        // Dismiss the picker.
         dismiss(animated: true, completion: nil)
-        
     }
 }
 

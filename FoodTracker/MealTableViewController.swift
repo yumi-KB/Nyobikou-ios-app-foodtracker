@@ -163,7 +163,6 @@ class MealTableViewController: UITableViewController {
     
     // MARK: Actions
     
-    // SaveButtonからIBAction設定してね
     // 新規オブジェクトの追加　もしオブジェクトの編集をするのであればデータを呼び出す
     // unwindtoMealList は目的地に記述する モーダルのリターン先
     @IBAction func unwindToMealList(sender: UIStoryboardSegue) {

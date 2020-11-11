@@ -8,12 +8,14 @@
 import UIKit
 
 @IBDesignable class RatingControl: UIStackView {
+    
     // MARK: Properties
     @IBInspectable var starSize: CGSize = CGSize(width: 50.0, height: 50.0) {
         didSet {
             setupButtons()
         }
     }
+    
     @IBInspectable var starCount: Int = 5 {
         didSet {
             setupButtons()
@@ -28,17 +30,16 @@ import UIKit
         }
     }
     
-    // Viewを作成するためのイニシャライザ（初期化関数２）
-    // MARK: Initialization
+    
     // MARK: Button Action
     @objc func ratingButtonTapped(button: UIButton){
         // ログ出力
-        //print("Button pressed 👍")
+        // print("Button pressed 👍")
         guard let index = ratingButtons.firstIndex(of: button) else{
             fatalError("The button, \(button), is not in the ratingButtons array: \(ratingButtons)")
         }
         
-        //calculate the rating of the selected button
+        // calculate the rating of the selected button
         let selectedRating = index + 1
         if selectedRating == rating {
             // If the selected the star represents the current rating, reset the rating to the 0.
@@ -49,6 +50,8 @@ import UIKit
         }
     }
     
+    
+    // MARK: Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupButtons()
@@ -59,7 +62,8 @@ import UIKit
         setupButtons()
     }
     
-    //初期化関数が呼ばれたらボタンを追加
+    
+    // 初期化関数が呼ばれたらボタンを追加
     // MARK: Private Methods
     private func setupButtons(){
         // Load Button Images
@@ -75,7 +79,7 @@ import UIKit
         }
         ratingButtons.removeAll()
         
-        //for _ in 0..<starCount{
+        // for _ in 0..<starCount{
         for index in 0..<starCount {
             // 1 Create the button
             let button = UIButton()
@@ -113,7 +117,7 @@ import UIKit
             // If the index of a button is less than the rating, that button should be selected.
             button.isSelected = index < rating
             
-            //set the hint string for the currently selected star
+            // set the hint string for the currently selected star
             let hintString: String?
             if rating == index + 1 {
                 hintString = "Tap to reset the rating to zero."
