@@ -1,15 +1,9 @@
-//
-//  RatingControl.swift
-//  FoodTracker
-//
-//  Created by yumi kanebayashi on 2020/10/16.
-//
-
 import UIKit
 
 /*@IBDesignable*/ class RatingControl: UIStackView {
     
     // MARK: Properties
+    
     /*@IBInspectable*/ var starSize: CGSize = CGSize(width: 50.0, height: 50.0) {
         didSet {
             setupButtons()
@@ -23,7 +17,8 @@ import UIKit
     }
     
     private var ratingButtons = [UIButton]()
-
+    
+    // property observer
     var rating = 0 {
         didSet {
             updateButtonSelectionState()
@@ -32,6 +27,7 @@ import UIKit
     
     
     // MARK: Initialization
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupButtons()
@@ -44,7 +40,9 @@ import UIKit
     
     
     // MARK: Button Action
+    
     @objc func ratingButtonTapped(button: UIButton) {
+        
         guard let index = ratingButtons.firstIndex(of: button) else {
             fatalError("The button, \(button), is not in the ratingButtons array: \(ratingButtons)")
         }
@@ -62,9 +60,12 @@ import UIKit
 
     
     // MARK: Private Methods
+    
     private func setupButtons(){
+        
         // (7) Load Button Images
         let bundle = Bundle(for: type(of: self))
+        
         let emptyStar = UIImage(named: "emptyStar", in: bundle, compatibleWith: self.traitCollection)
         let filledStar = UIImage(named: "filledStar", in: bundle, compatibleWith: self.traitCollection)
         let highlightedStar = UIImage(named: "highlightesStar", in: bundle, compatibleWith: self.traitCollection)
@@ -76,7 +77,6 @@ import UIKit
         }
         ratingButtons.removeAll()
         
-        // for _ in 0 ..< starCount{
         for index in 0 ..< starCount {
             // (1) Create the button
             let button = UIButton()
@@ -108,7 +108,7 @@ import UIKit
     }
     
     private func updateButtonSelectionState() {
-        // indexを用いて配列にアクセスする時、 enumerated を使おう
+        
         // enumerated 添字と要素が　タプルで取得出来る
         for (index, button) in ratingButtons.enumerated() {
             // If the index of a button is less than the rating, that button should be selected.
@@ -137,6 +137,5 @@ import UIKit
             button.accessibilityHint = hintString
             button.accessibilityValue = valueString
         }
-
     }
 }

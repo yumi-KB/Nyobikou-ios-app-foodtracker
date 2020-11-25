@@ -11,7 +11,6 @@ import XCTest
 class FoodTrackerTests: XCTestCase {
     // MARK: Meal Class Tests
     
-    //境界条件
     // Confirm that the Meal initializer return a Meal object when passed valid parameters.
     func testMealInitializationSuceeds() {
         // Zero rating
@@ -24,7 +23,6 @@ class FoodTrackerTests: XCTestCase {
         
     }
     
-    //失敗時
     // Confirm that the Meal initializer return nil when passed a negative rating or an empty name.
     func testMealInitializationFails() {
         // Negative rating
